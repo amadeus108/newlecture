@@ -19,16 +19,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.newlecture.web.dao.MemberDao;
 import com.newlecture.web.entity.Member;
+import com.newlecture.web.service.MybatisHomeService;
 
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
 	
 	@Autowired
-	private MemberDao memberDao;
+	private MybatisHomeService service;
+	/*
+	 * 데이터는 시스템에 준하는 이름이어야 한다. 그래서 Mybatis'Home'Service 는 이상하다.
+ 	 * 페이지당 하나의 서비스를 만들어도 된다. 하지만 그 단위가 너무 작으면 그 윗단으로 올라가서 포괄적으로 만들어도 된다.
+ 	 * 역할자마다 같은 시스템을 사용하게되면 중복되는 서비스가 생길 수 있다.
+	 */
+	
+	
+//	@Autowired
+//	private MemberDao memberDao;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -36,8 +47,8 @@ public class MemberController {
 	@GetMapping("join")
 	public String join(Model model) {
 		
-		Member member = memberDao.get("flwj");
-		model.addAttribute("member", member);
+//		Member member = memberDao.get("flwj");
+//		model.addAttribute("member", member);
 		return "member.join";
 	}
 
@@ -48,11 +59,38 @@ public class MemberController {
 	
 	@GetMapping("join-email")
 	public String joinEmail() {
+		
 		return "member.join-email";
 	}
 	
+	@GetMapping("email-duplicated-error")
+	@ResponseBody //그냥 리턴하면 404에러, 페이지를 찾지 못하니까!
+	public String emailDuplicatedError() {
+		return"<script>alert('이미 가입된 이메일 입니다.');location.href='join-email';</script>";
+	}
+	
+	@GetMapping("is-id-duplicated")
+	@ResponseBody 
+	public String isIdDuplicated(String id) {
+		boolean duplicated = service.isIdDuplicated(id);
+		
+		if(duplicated)
+			return "true";
+		
+		return "false";
+		//자바스크립트에게 응답을 보내는것. (사용자에게 보여주는게 아니다.)
+	}	
+	
 	@PostMapping("join-email")
 	public String joinEmail(String email, HttpServletResponse response) {
+		//이미 등록된 email인지 검사
+		//error 메세지를 뿌리려면 redirect를 하기 위한 컨트롤러가 따로 필요해진다.
+		
+		//이메일 중복인가? > yes or no
+		boolean duplicated = service.isEmailDuplicated(email);
+		
+		if(duplicated)
+			return "redirect:email-duplicated-error";
 		
 		//유니크한 id를 뽑아내야 한다. guid
 		UUID uuid = UUID.randomUUID(); // + 커스텀
@@ -130,13 +168,13 @@ public class MemberController {
 			Model model) {
 		
 		//에러가 나는 조건을 찾는다.
-		if(key.equals("") || joinId.equals("") || !key.equals(joinId)) {
-			
-			// join-error페이지 이동
-			return "member.join-error";
-		}
+//		if(key.equals("") || joinId.equals("") || !key.equals(joinId)) {
+//			
+//			// join-error페이지 이동
+//			return "member.join-error";
+//		}
 		
-		// newelcture@namo.com 에서 앞에 newelcture만 발췌하는 코드
+		// newelcture@naver.com 에서 앞에 newelcture만 발췌하는 코드
 		String uid = email.split("@")[0];
 		
 		model.addAttribute("uid", uid);
@@ -146,11 +184,17 @@ public class MemberController {
 		
 	}
 	
-/*	@PostMapping("join-reg")
-	public String joinReg(Model model) {
-		Member member = memberDao.get("flwj");
-		model.addAttribute("member", member);
-		return "member.join";
-	}*/
+//	09.11까지 한거, 내일 다시~	
+//	@PostMapping("join-reg")
+//	public String joinReg(Member member, 
+//			@RequestParam("photo-file") MultipartFile photofile) { //member에도 photo가 있기 떄문에 어디로 보내야할지 모름, multipartfile name은 다른이름으로 지정
+//		
+//		return "redirect: member.join-reg";
+//	}
 	
 }
+
+
+
+
+

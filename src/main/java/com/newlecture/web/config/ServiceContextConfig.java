@@ -73,8 +73,8 @@ public class ServiceContextConfig {
 		mailSender.setDefaultEncoding("UTF-8");
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
-		mailSender.setUsername("magnetic0824");
-		mailSender.setPassword("magnetic0611");
+		mailSender.setUsername("amadeus0108@gmail.com");
+		mailSender.setPassword("Skscjswo3#");
 
 		//이메일 보낼 때 이용할 설정값
 		Properties javaMailProperties = new Properties();

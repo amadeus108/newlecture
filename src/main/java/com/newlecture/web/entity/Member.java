@@ -9,8 +9,10 @@ public class Member {
 	private String email;
 	private String pwd;
 	private Date regDate;
+	private String photo;
 
 	public Member() {
+		
 	}
 
 	public Member(String id, String name, String email, String pwd, Date regDate) {
@@ -59,6 +61,14 @@ public class Member {
 
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	@Override

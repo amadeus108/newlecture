@@ -1,8 +1,14 @@
 package com.newlecture.web.config;
 
+import java.nio.charset.Charset;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -80,5 +86,39 @@ public class ServletContextConfig implements WebMvcConfigurer {
 		.addResourceLocations("/resources/");
 	}
 	
+	//한글을 살리자
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+		// 메세지를 주고받을때 변화를 주고싶다.
+		StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+		// 요청 헤더에 어떤 인코딩방식을 쓴다고 설정할 수 있는데, 그걸 따라가지 말고 내가 여기서 설정한 방식만 따라가라는 것
+		converter.setWriteAcceptCharset(false);
+		
+		converters.add(converter);
+		
+		WebMvcConfigurer.super.configureMessageConverters(converters);
+	}
+	
+	//멀티파트리졸버 = 입력에 대한 리졸버(view에 대한게 아니다)
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+		
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setMaxUploadSize(1024*1024*100); //업로드하는 전체파일의 맥스사이즈 제한
+		resolver.setMaxUploadSizePerFile(1024*1024*10); //업로드파일마다의 맥스사이즈, 기본적으로 여러개의 파일이 오는 경우
+		
+		
+		return resolver;
+	}
+
 
 }
+
+
+
+
+
+
+
+
+
