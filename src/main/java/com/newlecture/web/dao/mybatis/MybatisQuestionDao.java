@@ -40,9 +40,9 @@ public class MybatisQuestionDao implements QuestionDao {
 	}
 
 	@Override
-	public List<Question> getList() {
+	public List<Question> getList(String query, String ownerId, String sortField, int page) {
 		QuestionDao questionDao = sqlSession.getMapper(QuestionDao.class);
-		return questionDao.getList();
+		return questionDao.getList(query, ownerId, sortField, page);
 	}
 
 

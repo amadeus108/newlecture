@@ -28,11 +28,18 @@
 
 	<select id="getList" resultType="com.newlecture.web.entity.Question">
 		select * from Question
-		where ${param1} like '%${param2}%'
-		<!-- 다음은 페이징을 위한 쿼리 옵션 -->
+		where content like '%${param1}%'
+		<if test="param2 != null">
+			and regUserId = #{param2}
+		</if>
+		order by ${param3} desc
+		off #{(param4-1)*10} rows
+		fetch next 10 rows only
+		<!-- where ${param1} like '%${param2}%'
+		다음은 페이징을 위한 쿼리 옵션, order by를 끼고있어야만 offset이 가능하다
 		order by regDate desc
 		offset #{(param3-1)}*10 rows
-		fetch next 10 rows only
+		fetch next 10 rows only -->
 	</select>
 
 </mapper>

@@ -2,20 +2,24 @@ package com.newlecture.web.entity;
 
 import java.util.Date;
 
-public class Level {
+import javax.persistence.Column;
+
+public class QuestionLevel {
 
 	private long id;
-	private String title;
+	private String name;
+	/*DB에 저장된 컬럼명이 REG_USER_ID 고, 내 프로젝트에서는 아래 regUserId라는 컬럼명으로 쿼리를 만들겠다고 알려주는것*/
+	@Column(name="REG_USER_ID")
 	private String regUserId;
 	private Date regDate;
 	private String description;
 
-	public Level() {
+	public QuestionLevel() {
 
 	}
 
-	public Level(String title, String regUserId, String description) {
-		this.title = title;
+	public QuestionLevel(String name, String regUserId, String description) {
+		this.name = name;
 		this.regUserId = regUserId;
 		this.description = description;
 	}
@@ -28,12 +32,12 @@ public class Level {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getname() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setname(String name) {
+		this.name = name;
 	}
 
 	public String getRegUserId() {
@@ -62,7 +66,7 @@ public class Level {
 
 	@Override
 	public String toString() {
-		return "Subject [id=" + id + ", title=" + title + ", regUserId=" + regUserId + ", regDate=" + regDate
+		return "Subject [id=" + id + ", name=" + name + ", regUserId=" + regUserId + ", regDate=" + regDate
 				+ ", description=" + description + "]";
 	}
 

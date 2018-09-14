@@ -27,6 +27,10 @@ public class SecurityContextConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			.headers()
+				.frameOptions()
+				.sameOrigin()
+			.and()
 			.csrf().disable()
 			.authorizeRequests() // 인터셉터 설정
 				.antMatchers("/teacher/**").hasAnyRole("ADMIN, TEACHER") // 권한이 필요해

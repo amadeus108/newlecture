@@ -99,14 +99,14 @@ public class ServletContextConfig implements WebMvcConfigurer {
 		WebMvcConfigurer.super.configureMessageConverters(converters);
 	}
 	
-	//멀티파트리졸버 = 입력에 대한 리졸버(view에 대한게 아니다)
+	//MultipartResolver = 입력에 대한 리졸버(view에 대한게 아니다)
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		resolver.setMaxUploadSize(1024*1024*100); //업로드하는 전체파일의 맥스사이즈 제한
 		resolver.setMaxUploadSizePerFile(1024*1024*10); //업로드파일마다의 맥스사이즈, 기본적으로 여러개의 파일이 오는 경우
-		
+		resolver.setDefaultEncoding("UTF-8"); //인코딩 방식을 UTF-8로 지정, Filter와 차이
 		
 		return resolver;
 	}

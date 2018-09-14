@@ -9,18 +9,10 @@ public class Member {
 	private String email;
 	private String pwd;
 	private Date regDate;
-	private String photo;
+	private String photo; // 사용자가 선택한 사진 파일만 담는다.
 
 	public Member() {
 		
-	}
-
-	public Member(String id, String name, String email, String pwd, Date regDate) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.pwd = pwd;
-		this.regDate = regDate;
 	}
 
 	public String getId() {
@@ -62,7 +54,7 @@ public class Member {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
+
 	public String getPhoto() {
 		return photo;
 	}
@@ -71,10 +63,21 @@ public class Member {
 		this.photo = photo;
 	}
 
+	public Member(String id, String name, String email, String pwd, Date regDate, String photo) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.pwd = pwd;
+		this.regDate = regDate;
+		this.photo = photo;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", name=" + name + ", email=" + email + ", pwd=" + pwd + ", regDate=" + regDate
-				+ "]";
+				+ ", photo=" + photo + "]";
 	}
+
+	
 
 }

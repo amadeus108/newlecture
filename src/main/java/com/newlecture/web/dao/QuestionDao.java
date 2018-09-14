@@ -14,6 +14,6 @@ public interface QuestionDao {
 
 	Question get(long id);
 
-	List<Question> getList();
+	List<Question> getList(String query, String ownerId, String sortField, int page);
 
 }

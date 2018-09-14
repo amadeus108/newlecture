@@ -11,8 +11,16 @@
 		
 	<!-- access 역할자의 정보를 알려줘야 한다. -->		
 	<http auto-config="true">
+		<headers>
+			<frame-options policy="SAMEORIGIN"/>
+			<!-- DENY 모두 거부
+			SAMEORIGIN 제공자가 같으면 허용
+			ALLOW-FROM ???? -->
+		</headers>
 		<!-- 하위 객체의 모든 것  /** -->
 		<intercept-url pattern="/teacher/**" access="hasRole('ROLE_TEACHER')" />
+		<form-login login-page="" login-processing-url="" />
+		<logout logout-success-url="" />
 	</http>
 	
 	<!-- 인증정보 때려박음, db연동, 서버사용자정보 -->

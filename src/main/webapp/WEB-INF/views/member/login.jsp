@@ -25,6 +25,12 @@
 						<input type="submit" value="로그인">
 					</td>
 				</tr>  
+				<tr>
+					<td>
+						<a href="find-id">아이디 찾기</a>
+						<a href="reset-pwd">비밀번호 재설정</a>
+					</td>
+				</tr>  
 			</table>
 		</form>
 	</section>

@@ -3,7 +3,7 @@
 <main>
 	<section id="form-section">
 		<h1>회원 가입 페이지</h1>
-			<form method="post" enctype="multipart/form-data"> 
+			<form method="POST" enctype="multipart/form-data"> 
 			<!-- method가 빠지면 get요청이 기본 / multipart data로 인코딩하지 않으면 전송이 안됨 -->
 				<table>
 					<tr>
@@ -11,9 +11,11 @@
 							<label>사진 :</label>
 							<img class="photo" src="" /> <!-- 서버에 있는 이미지를 요청하기 위한 주소 -->
 							<!-- 안보임 -->
-							<input type="file" hidden="true" name="photo" value="사진선택" />
+							<input type="file" hidden="true" name="photo-file" value="사진선택" />
 							<span class="photo-button">사진선택</span>
 						</td>
+					</tr>
+					<tr>	
 						<td>
 							<label>아이디 :</label>
 							<!-- id 4자이상 입력받는 문구를 뿌려주고, 4자 이하는 입력하지 못하게 만들기 -->
@@ -40,6 +42,14 @@
 							<label>이메일 :</label>
 							<input type="text" name="email" value="${email}" readonly="readonly" />
 						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>다음 게산 결과는? <img src="moonjae.jpg" /></label>
+							<input name="moonjae" />
+						</td>
+					</tr>
+					<tr>	
 						<td>
 							<input type="submit" value="회원가입" />
 						</td>
@@ -108,25 +118,30 @@ window.addEventListener("load", function(event){
 	};
 
 	idCheckButton.onclick = function(e){
-		alert("test");
+// 		alert("test");
 		/* id중복검사
 		   ajax -> server 협력자 백엔드에게 연락해서 알아봐야함
 		    /member/is-id-duplicated
 		 */
 		var request = new XMLHttpRequest();
-		var duplicated = JSON.parse(request.responseText);
 		
 		var id = idInput.value; 
 		
-			//XmlHttpRequest request = new XmlHttpRequest();
+		//XmlHttpRequest request = new XmlHttpRequest();
 		request.onload = function(e){
 			//완성해야돼
 			if(request.status === 200){ //정상이면 
-				alert(request.responseText);
+				var duplicated = JSON.parse(request.responseText);
+// 				alert(request.responseText);
+				if(duplicated){
+					alert("중복된 아이디가 있습니다.");
+					return;
+				}
+				alert("가입을 진행하세요~!");
+				idOk = true;
 			}else{
-				alert("request에 문제가 있다.");
+				alert("request에 문제가 있습니다.");
 			}
-			
 		};
 		request.open("GET", "is-id-duplicated?id=" + id, true);
 		request.send();

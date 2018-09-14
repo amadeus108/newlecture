@@ -7,7 +7,7 @@ import com.newlecture.web.entity.Member;
 public interface MemberDao {
 
 	int insert(Member member);
-
+	
 	int update(Member member);
 
 	int delete(String id);

@@ -5,5 +5,6 @@
 		<h1>회원가입</h1>
 		<a href="join-email">email로 가입하기</a>
 		<a href="join-kakao">카카오 계정으로 가입하기</a>
+		<a href="">네이버 계정으로 가입하기</a>
 	</section>
 </main>
