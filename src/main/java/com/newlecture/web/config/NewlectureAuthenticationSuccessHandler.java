@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
-import com.newlecture.web.service.MybatisHomeService;
+import com.newlecture.web.service.HomeService;
 
 @Component
 public class NewlectureAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -27,8 +27,9 @@ public class NewlectureAuthenticationSuccessHandler implements AuthenticationSuc
 	그래서 USER INTERFACE이다.
 */
 	
+	//Hibernate 설정을 위한 임시 주석처리
 	@Autowired
-	private MybatisHomeService service;
+	private HomeService service;
 	
 	//이동시키기 위한 도구
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

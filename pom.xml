@@ -78,7 +78,6 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>5.0.7.RELEASE</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
@@ -135,6 +134,13 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.3.4.Final</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>5.0.9.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 
 	<properties>

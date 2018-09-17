@@ -3,14 +3,19 @@ package com.newlecture.web.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class QuestionLevel {
 
+	@Id
 	private long id;
 	private String name;
 	/*DB에 저장된 컬럼명이 REG_USER_ID 고, 내 프로젝트에서는 아래 regUserId라는 컬럼명으로 쿼리를 만들겠다고 알려주는것*/
 	@Column(name="REG_USER_ID")
 	private String regUserId;
+	@Column(insertable=false)
 	private Date regDate;
 	private String description;
 

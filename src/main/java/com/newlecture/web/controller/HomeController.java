@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.newlecture.web.dao.MemberDao;
+import com.newlecture.web.dao.hb.HbMemberDao;
+import com.newlecture.web.entity.Member;
 
 @Controller
 @RequestMapping("/")
@@ -17,8 +19,10 @@ public class HomeController {
 
 	@GetMapping("index")
 	public String index(Model model) {
-/*		Member member = memberDao.get("newlec");
-		model.addAttribute("member", member);*/
+		Member member = memberDao.get("newlec");
+		
+		System.out.println(member);
+//		model.addAttribute("member", member);
 		return "home.index";
 	}
 

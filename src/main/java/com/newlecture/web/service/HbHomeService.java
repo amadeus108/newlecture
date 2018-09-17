@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.newlecture.web.dao.MemberDao;
 import com.newlecture.web.dao.MemberRoleDao;
@@ -11,7 +12,7 @@ import com.newlecture.web.entity.Member;
 import com.newlecture.web.entity.MemberRole;
 
 @Service
-public class MybatisHomeService {
+public class HbHomeService implements HomeService{
 	
 	@Autowired
 	private MemberRoleDao memberRoleDao;
@@ -52,8 +53,10 @@ public class MybatisHomeService {
 	}
 
 	public int insertMember(Member member) {
+		
 		int result = memberDao.insert(member);
 		memberRoleDao.insert(new MemberRole(member.getId(), "ROLE_STUDENT", true));
+		
 		return result;
 	}
 

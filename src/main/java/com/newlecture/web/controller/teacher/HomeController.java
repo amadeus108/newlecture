@@ -14,6 +14,7 @@ import com.newlecture.web.service.TeacherService;
 @RequestMapping("/teacher/")
 public class HomeController {
 	
+	//Hibernate 설정을 위한 임시 주석처리
 	@Autowired
 	private TeacherService teacherService;
 

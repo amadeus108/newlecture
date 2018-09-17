@@ -41,14 +41,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.newlecture.web.dao.MemberDao;
 import com.newlecture.web.entity.Member;
-import com.newlecture.web.service.MybatisHomeService;
+import com.newlecture.web.service.HomeService;
 
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
 	
+	//Hibernate 적용을 위한 임시 주석처리
 	@Autowired
-	private MybatisHomeService service;
+	private HomeService service;
 	/*
 	 * 데이터는 시스템에 준하는 이름이어야 한다. 그래서 Mybatis'Home'Service 는 이상하다.
  	 * 페이지당 하나의 서비스를 만들어도 된다. 하지만 그 단위가 너무 작으면 그 윗단으로 올라가서 포괄적으로 만들어도 된다.

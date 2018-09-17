@@ -35,7 +35,7 @@ window.addEventListener("load", function(event) {
 		webEditor.innerHTML = request.responseText;
 		// alert(style.editorTarget.innerHTML);
 
-		editorTarget.before(webEditor);
+		editorTarget.after(webEditor);
 
 		var iframe = webEditor.querySelector("iframe");
 		var win = iframe.contentWindow; // template의 iframe에 접근할 window를 받아온다.
@@ -45,12 +45,45 @@ window.addEventListener("load", function(event) {
 			var doc = win.document; // template의 window의 document에 접근한다.
 			// alert(doc);
 
-			var boldButton = webEditor.querySelector(".bold-button");
+			//버튼 하나하나에 적용하는 방법
+			/*var boldButton = webEditor.querySelector(".bold-button");
 			boldButton.onclick = function(e) {
 				// alert("test");
 				// window.document.execCommand("bold");
 
 				doc.execCommand("bold");
+			}*/
+			
+			//toobar 전체에 적용하는 방법
+			var toolbar = webEditor.querySelector(".toolbar");
+			
+			toolbar.onclick = function(e) {
+				var name = e.target.dataset.name;
+				
+				var select = doc.getSelection();
+				var range = select.getRangeAt(0);
+				switch(name){
+					case "bold":
+						//doc.execCommand("bold");
+						alert(select.anchorNode);
+						doc.execCommand("insertHTML", false, "<strong>"+range+"</strong>");
+						break;
+					case "italic":
+						//doc.execCommand("italic");
+						doc.execCommand("insertHTML", false, "</strong>"+range+"<strong>");
+						break;
+					case "color":
+						doc.execCommand("foreColor", false, '#ff0000');
+						break;
+					default:
+						return;
+				}
+				editorTarget.value = doc.body.innerHTML;
+			}
+
+			doc.body.onkeyup = function(){
+				//console.log("change");
+				editorTarget.value = doc.body.innerHTML; //body에 입력한 내용이 textarea에 적용
 			}
 
 		})

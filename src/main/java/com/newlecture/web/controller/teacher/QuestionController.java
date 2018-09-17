@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.newlecture.web.entity.QuestionLevel;
 import com.newlecture.web.entity.Question;
 import com.newlecture.web.entity.Subject;
-import com.newlecture.web.service.MybatisTeacherService;
+import com.newlecture.web.service.HbTeacherService;
 
 @Controller
 @RequestMapping("/teacher/question/")
 public class QuestionController {
 	
+	//Hibernate 설정을 위한 임시 주석처리
 	@Autowired
-	private MybatisTeacherService service;
+	private HbTeacherService service;
 	
 	@GetMapping("list")
 	public String list(Model model) {

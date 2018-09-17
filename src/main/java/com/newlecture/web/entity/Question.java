@@ -2,11 +2,18 @@ package com.newlecture.web.entity;
 
 import java.util.Date;
 
-public class Question {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Question {
+	
+	@Id
 	private long id;
 	private String content;
 	private String figure;
+	@Column(insertable=false)
 	private Date regDate;
 	private String regUserId;
 
