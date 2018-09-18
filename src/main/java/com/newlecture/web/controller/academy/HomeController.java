@@ -1,15 +1,15 @@
-package com.newlecture.web.controller;
+package com.newlecture.web.controller.academy;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-@RequestMapping("/")
-public class AcademyController {
+@Controller("academyController")
+@RequestMapping("/academy/")
+public class HomeController {
 	
-	@GetMapping("academy")
+	@GetMapping("index")
 	public String academy() {
-		return "home.academy";
+		return "academy/index";
 	}
 }

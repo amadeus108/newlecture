@@ -90,7 +90,7 @@ public class ServiceContextConfig {
 
 	
 	//위에서 만든 SqlSesstionFactory를 IoC 컨테이너에서 찾아 매개변수에 자동으로 넣어주고 
-	// SqlSesstionTemplate객체를 반환하자, 매개변수에 위에서 설정한 팩토리
+	// SqlSesstionTemplate객체를 반환하자
 	@Bean
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
