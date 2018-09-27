@@ -62,18 +62,52 @@ window.addEventListener("load", function(event) {
 				
 				var select = doc.getSelection();
 				var range = select.getRangeAt(0);
+				
 				switch(name){
 					case "bold":
-						//doc.execCommand("bold");
-						alert(select.anchorNode);
+						//doc.execCommand("bold"); //브라우저에서 사용되는 기본 bold 태그
 						doc.execCommand("insertHTML", false, "<strong>"+range+"</strong>");
 						break;
 					case "italic":
-						//doc.execCommand("italic");
-						doc.execCommand("insertHTML", false, "</strong>"+range+"<strong>");
+						doc.execCommand("italic");
 						break;
 					case "color":
 						doc.execCommand("foreColor", false, '#ff0000');
+						break;
+					case "image":
+						var fileInput = toolbar.querySelector("input[type='file']");
+						
+						var mouseEvent = new MouseEvent("click", {
+							'view' : window,
+							'bubbles' : true,
+							'cancelable' : true
+						});
+
+						fileInput.dispatchEvent(mouseEvent);
+						fileInput.onchange = function(){
+							//alert("trigger test");
+							var file = fileInput.files[0];
+							//file.size;
+							if(file.size > 1024*1024*10){
+								alert("파일 사이즈는 10MB를 초과할 수 없습니다.");
+								return false;
+							}
+							//file.type;
+
+							//url encoded 문자열 조합으로 보낸다. / multipart-form 문자열과 섞어서 보낼때 사용
+							var formData = new FormData(); //폼데이터 객체 생성
+							formData.append("file",file);
+
+							var request = new XMLHttpRequest();
+							request.onload = function(){
+								// 업로드된 사진을 편집 영역에 붙여넣기
+								// 업로드한 파일명, 경로를 알려주리
+								var path = request.responseText;
+								alert(path);
+							}
+							request.open("POST", "/academy/upload-ajax", true);
+							request.send(formData);
+						};
 						break;
 					default:
 						return;

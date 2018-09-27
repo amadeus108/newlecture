@@ -45,7 +45,7 @@
 					</tr>
 					<tr>
 						<td>
-							<label>다음 게산 결과는? <img src="moonjae.jpg" /></label>
+							<label>다음 계산 결과는? <img src="moonjae.jpg" /></label>
 							<input name="moonjae" />
 						</td>
 					</tr>

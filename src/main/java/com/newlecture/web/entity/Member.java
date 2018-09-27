@@ -18,7 +18,7 @@ public class Member {
 	private String pwd;
 	@Column(insertable=false) //regDate는 insert할때 사용하지 말라는 설정(regDate는 default값이 들어가니까)
 	private Date regDate;
-	//@Column(name="FOTO") //DB와 컬럼명 다른경우 설정
+	//@Column(name="FOTO") //DB와 컬럼명이 다른 경우 설정
 	private String photo; // 사용자가 선택한 사진 파일만 담는다.
 	
 	public Member() {
